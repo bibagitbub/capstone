@@ -31,9 +31,9 @@ eq_location_clean <- function(location_name)
 #' @return This function returns the clean version of the dataset
 #'
 #' @import dplyr
-#' 
+#'
 #' @import lubridate
-#' 
+#'
 #' @import readr
 #'
 #' @export

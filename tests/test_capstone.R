@@ -1,4 +1,6 @@
 library(testthat)
+library(lubridate)
+library(readr)
 
 earthquakes <- readr::read_delim("signif.txt",delim="\t")
 earthquakes <- eq_clean_data(earthquakes)
