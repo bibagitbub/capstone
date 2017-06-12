@@ -47,10 +47,10 @@ xmax <- as.Date("2017-01-01")
 countries <- c("ITALY","USA")
 n_max <- 10
 
-to_plot <- earthquakes %>%
-  dplyr::filter(date >= x & date <=xmax & (COUNTRY %in% countries)) %>%
-  dplyr::filter(!is.na(INTENSITY) & !is.na(DEATHS)) %>%
-  dplyr::mutate(COUNTRY = factor(COUNTRY, levels = unique(COUNTRY)))
+to_plot <- earthquakes
+to_plot <- dplyr::filter(to_plot, date >= x & date <=xmax & (COUNTRY %in% countries))
+to_plot <- dplyr::filter(to_plot, !is.na(INTENSITY) & !is.na(DEATHS))
+to_plot <- dplyr::mutate(to_plot, COUNTRY = factor(COUNTRY, levels = unique(COUNTRY)))
 
 to_plot2 <- to_plot[order(to_plot$INTENSITY,decreasing = TRUE),]
 to_plot2 <- to_plot2[1:min(n_max,nrow(to_plot2)),]
@@ -76,9 +76,10 @@ the magnitude (EQ_PRIMARY), and the total number of deaths (TOTAL_DEATHS).
 
 ```{r, fig.show='hold'}
 library(capstone)
-readr::read_delim("signif.txt", delim = "\t") %>%
-  eq_clean_data() %>%
-  dplyr::filter(COUNTRY == "MEXICO" & lubridate::year(date) >= 2000) %>%
-  dplyr::mutate(popup_text = eq_create_label(.)) %>%
-  eq_map(annot_col = "popup_text")
+out <- readr::read_delim("signif.txt", delim = "\t")
+out <- eq_clean_data(out)
+out <- dplyr::filter(out, COUNTRY == "MEXICO" & lubridate::year(date) >= 2000)
+out <- dplyr::mutate(out, popup_text = eq_create_label(out))
+out <- eq_map(out, annot_col = "popup_text")
+out
 ```
