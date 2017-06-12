@@ -6,8 +6,9 @@ library(ggplot2)
 library(leaflet)
 
 earthquakes <- readr::read_delim("signif.txt",delim="\t")
+earthquakes <- capstone::eq_clean_data(earthquakes)
 
-expect_that(capstone::eq_clean_data(earthquakes),is_a("data.frame"))
+expect_that(earthquakes,is_a("data.frame"))
 
 
 
