@@ -41,7 +41,7 @@ expect_that(g,is_a("ggplot"))
 g <- readr::read_delim("signif.txt", delim = "\t") %>%
   capstone::eq_clean_data() %>%
   dplyr::filter(COUNTRY == "MEXICO" & lubridate::year(date) >= 2000) %>%
-  dplyr::mutate(popup_text = eq_create_label(.)) %>%
+  dplyr::mutate(popup_text = capstone::eq_create_label(.)) %>%
   capstone::eq_map(annot_col = "popup_text")
 
 expect_that(g,is_a("leaflet"))
