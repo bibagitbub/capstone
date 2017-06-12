@@ -38,6 +38,8 @@ eq_location_clean <- function(location_name)
 #'
 #' @import readr
 #'
+#' @import testthat
+#'
 #' @export
 eq_clean_data <- function(raw)
 {

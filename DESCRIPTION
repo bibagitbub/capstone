@@ -8,7 +8,7 @@ Description: Functions for analysing and visualising
         a dataset obtained from the U.S. National Oceanographic and Atmospheric Administration (NOAA)
         on significant earthquakes around the world.
 License: CC0
-Imports: stringr, dplyr, ggplot2, grid, leaflet, lubridate, readr
+Imports: stringr, dplyr, ggplot2, grid, leaflet, lubridate, readr, testthat
 Encoding: UTF-8
 LazyData: true
 Suggests: knitr,
