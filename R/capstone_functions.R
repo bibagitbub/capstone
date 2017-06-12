@@ -6,6 +6,8 @@
 #'
 #' @param location_name represents the detailed information about location
 #'
+#' @import stringr
+#'
 #' @return This function returns the clean version of the LOCATION_NAME
 #'
 eq_location_clean <- function(location_name)
