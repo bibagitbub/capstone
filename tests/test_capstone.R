@@ -1,7 +1,7 @@
 earthquakes <- readr::read_delim("signif.txt",delim="\t")
 earthquakes <- capstone::eq_clean_data(earthquakes)
 
-testthat::expect_that(earthquakes,is_a("data.frame"))
+testthat::expect_that(earthquakes,testthat::is_a("data.frame"))
 
 
 
@@ -27,7 +27,7 @@ g <- ggplot2::ggplot(data = to_plot) +
   capstone::geom_timeline_label(data = to_plot2, aes(x = date, y = as.numeric(COUNTRY) + 0.4, label = LOCATION_NAME)) +
   ggplot2::theme_minimal()
 
-testthat::expect_that(g,is_a("ggplot"))
+testthat::expect_that(g,testthat::is_a("ggplot"))
 
 
 
@@ -37,4 +37,4 @@ g <- readr::read_delim("signif.txt", delim = "\t") %>%
   dplyr::mutate(popup_text = capstone::eq_create_label(.)) %>%
   capstone::eq_map(annot_col = "popup_text")
 
-testthat::expect_that(g,is_a("leaflet"))
+testthat::expect_that(g,testthat::is_a("leaflet"))

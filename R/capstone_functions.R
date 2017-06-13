@@ -39,6 +39,7 @@ eq_location_clean <- function(location_name)
 #' @import readr
 #'
 #' @importFrom testthat expect_that
+#' @importFrom testthat is_a
 #'
 #' @export
 eq_clean_data <- function(raw)
