@@ -27,9 +27,8 @@ it converts the longitude and latitude information to numeric
 and it applies the `eq_location_clean` function to LOCATION_NAME field.
 
 ```{r}
-library(capstone)
 earthquakes <- readr::read_delim("signif.txt",delim="\t")
-earthquakes <- eq_clean_data(earthquakes)
+earthquakes <- capstone::eq_clean_data(earthquakes)
 head(earthquakes)
 ```
 
@@ -41,7 +40,6 @@ scale value) and the number of deaths associated with each earthquake.
 `geom_timeline_label` adds labels of the earthquakes on a Timeline representation.
 
 ```{r, fig.show='hold'}
-library(capstone)
 x <- as.Date("2000-01-01")
 xmax <- as.Date("2017-01-01")
 countries <- c("ITALY","USA")
@@ -58,10 +56,10 @@ to_plot2 <- to_plot2[1:min(n_max,nrow(to_plot2)),]
 ggplot2::ggplot(data = to_plot) +
   ggplot2::geom_segment(ggplot2::aes(x = x, xend = xmax, y = COUNTRY, yend = COUNTRY),
                alpha = 0.5, color = "gray") +
-  geom_timeline(ggplot2::aes(x = date, y = COUNTRY, i = INTENSITY, d = DEATHS)) +
+  capstone::geom_timeline(ggplot2::aes(x = date, y = COUNTRY, i = INTENSITY, d = DEATHS)) +
   ggplot2::geom_segment(data = to_plot2, ggplot2::aes(x = date, xend = date, y = COUNTRY, yend = as.numeric(COUNTRY) + 0.25),
                alpha = 0.5, color = "gray") +
-  geom_timeline_label(data = to_plot2, ggplot2::aes(x = date, y = as.numeric(COUNTRY) + 0.4, label = LOCATION_NAME)) +
+  capstone::geom_timeline_label(data = to_plot2, ggplot2::aes(x = date, y = as.numeric(COUNTRY) + 0.4, label = LOCATION_NAME)) +
   ggplot2::theme_minimal()
 ```
 
@@ -75,11 +73,10 @@ containing the location cleaned by the `eq_location_clean` function,
 the magnitude (EQ_PRIMARY), and the total number of deaths (TOTAL_DEATHS).
 
 ```{r, fig.show='hold'}
-library(capstone)
 out <- readr::read_delim("signif.txt", delim = "\t")
-out <- eq_clean_data(out)
+out <- capstone::eq_clean_data(out)
 out <- dplyr::filter(out, COUNTRY == "MEXICO" & lubridate::year(date) >= 2000)
-out <- dplyr::mutate(out, popup_text = eq_create_label(out))
-out <- eq_map(out, annot_col = "popup_text")
+out <- dplyr::mutate(out, popup_text = capstone::eq_create_label(out))
+out <- capstone::eq_map(out, annot_col = "popup_text")
 out
 ```

@@ -34,11 +34,11 @@ eq_location_clean <- function(location_name)
 #'
 #' @import dplyr
 #'
-#' @import lubridate
+#' @importFrom lubridate year
 #'
 #' @import readr
 #'
-#' @import testthat
+#' @importFrom testthat expect_that
 #'
 #' @export
 eq_clean_data <- function(raw)
