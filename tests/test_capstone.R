@@ -10,10 +10,10 @@ xmax <- as.Date("2017-01-01")
 countries <- c("ITALY","USA")
 n_max <- 10
 
-to_plot <- earthquakes %>%
-  dplyr::filter(date >= x & date <=xmax & (COUNTRY %in% countries)) %>%
-  dplyr::filter(!is.na(INTENSITY) & !is.na(DEATHS)) %>%
-  dplyr::mutate(COUNTRY = factor(COUNTRY, levels = unique(COUNTRY)))
+to_plot <- earthquakes
+to_plot <- dplyr::filter(to_plot, date >= x & date <=xmax & (COUNTRY %in% countries))
+to_plot <- dplyr::filter(to_plot, !is.na(INTENSITY) & !is.na(DEATHS))
+to_plot <- dplyr::mutate(to_plot, COUNTRY = factor(COUNTRY, levels = unique(COUNTRY)))
 
 to_plot2 <- to_plot[order(to_plot$INTENSITY,decreasing = TRUE),]
 to_plot2 <- to_plot2[1:min(n_max,nrow(to_plot2)),]
@@ -31,10 +31,10 @@ testthat::expect_that(g,testthat::is_a("ggplot"))
 
 
 
-g <- readr::read_delim("signif.txt", delim = "\t") %>%
-  capstone::eq_clean_data() %>%
-  dplyr::filter(COUNTRY == "MEXICO" & lubridate::year(date) >= 2000) %>%
-  dplyr::mutate(popup_text = capstone::eq_create_label(.)) %>%
-  capstone::eq_map(annot_col = "popup_text")
+g <- readr::read_delim("signif.txt", delim = "\t")
+g <- capstone::eq_clean_data(g)
+g <- dplyr::filter(g, COUNTRY == "MEXICO" & lubridate::year(date) >= 2000)
+g <- dplyr::mutate(g, popup_text = capstone::eq_create_label(g))
+g <- capstone::eq_map(g, annot_col = "popup_text")
 
 testthat::expect_that(g,testthat::is_a("leaflet"))
