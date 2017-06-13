@@ -19,12 +19,12 @@ to_plot2 <- to_plot[order(to_plot$INTENSITY,decreasing = TRUE),]
 to_plot2 <- to_plot2[1:min(n_max,nrow(to_plot2)),]
 
 g <- ggplot2::ggplot(data = to_plot) +
-  ggplot2::geom_segment(aes(x = x, xend = xmax, y = COUNTRY, yend = COUNTRY),
+  ggplot2::geom_segment(ggplot2::aes(x = x, xend = xmax, y = COUNTRY, yend = COUNTRY),
                alpha = 0.5, color = "gray") +
-  capstone::geom_timeline(aes(x = date, y = COUNTRY, i = INTENSITY, d = DEATHS)) +
-  ggplot2::geom_segment(data = to_plot2, aes(x = date, xend = date, y = COUNTRY, yend = as.numeric(COUNTRY) + 0.25),
+  capstone::geom_timeline(ggplot2::aes(x = date, y = COUNTRY, i = INTENSITY, d = DEATHS)) +
+  ggplot2::geom_segment(data = to_plot2, ggplot2::aes(x = date, xend = date, y = COUNTRY, yend = as.numeric(COUNTRY) + 0.25),
                alpha = 0.5, color = "gray") +
-  capstone::geom_timeline_label(data = to_plot2, aes(x = date, y = as.numeric(COUNTRY) + 0.4, label = LOCATION_NAME)) +
+  capstone::geom_timeline_label(data = to_plot2, ggplot2::aes(x = date, y = as.numeric(COUNTRY) + 0.4, label = LOCATION_NAME)) +
   ggplot2::theme_minimal()
 
 testthat::expect_that(g,testthat::is_a("ggplot"))
