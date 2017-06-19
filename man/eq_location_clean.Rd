@@ -16,3 +16,9 @@ This function returns the clean version of the LOCATION_NAME
 This function parses the LOCATION_NAME stripping out the country name
 and converting it to title case
 }
+\examples{
+\dontrun{
+eq_location_clean(raw$LOCATION_NAME)
+}
+
+}

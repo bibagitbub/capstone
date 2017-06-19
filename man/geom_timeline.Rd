@@ -14,3 +14,9 @@ This function applies the layer of a GeomTimeline geom
 \description{
 This function applies a ggplot layer of a GeomTimeline geom to a map
 }
+\examples{
+\dontrun{
+geom_timeline(to_plot, aes(x = date, y = COUNTRY, i = INTENSITY, d = DEATHS))
+}
+
+}

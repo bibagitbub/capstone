@@ -17,3 +17,9 @@ This function converts time information to Date class,
 it converts the longitude and latitude information to numeric
 and it applies the eq_location_clean() function to LOCATION_NAME
 }
+\examples{
+\dontrun{
+eq_clean_data(raw)
+}
+
+}

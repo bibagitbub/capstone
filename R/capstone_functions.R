@@ -9,7 +9,12 @@
 #' @import stringr
 #'
 #' @return This function returns the clean version of the LOCATION_NAME
-#'
+#' 
+#' @examples
+#' \dontrun{
+#' eq_location_clean(raw$LOCATION_NAME)
+#' }
+#' 
 eq_location_clean <- function(location_name)
 {
   new_location <- strsplit(location_name,":")
@@ -42,6 +47,12 @@ eq_location_clean <- function(location_name)
 #' @importFrom testthat is_a
 #'
 #' @export
+#' 
+#' @examples
+#' \dontrun{
+#' eq_clean_data(raw)
+#' }
+#' 
 eq_clean_data <- function(raw)
 {
   clean <- raw %>%
@@ -122,6 +133,12 @@ GeomTimeline <- ggplot2::ggproto("GeomTimeline", ggplot2::Geom,
 #' @import ggplot2
 #'
 #' @export
+#' 
+#' @examples
+#' \dontrun{
+#' geom_timeline(to_plot, aes(x = date, y = COUNTRY, i = INTENSITY, d = DEATHS))
+#' }
+#' 
 geom_timeline <- function(mapping = NULL, data = NULL, stat = "identity",
                            position = "identity", na.rm = FALSE,
                            show.legend = NA, inherit.aes = TRUE, ...) {
@@ -177,6 +194,12 @@ GeomTimelineLabel <- ggplot2::ggproto("GeomTimelineLabel", ggplot2::Geom,
 #' @import ggplot2
 #'
 #' @export
+#' 
+#' @examples
+#' \dontrun{
+#' geom_timeline_label(to_plot, aes(x = date, y = COUNTRY, label = LOCATION_NAME))
+#' }
+#' 
 geom_timeline_label <- function(mapping = NULL, data = NULL, stat = "identity",
                           position = "identity", na.rm = FALSE,
                           show.legend = NA, inherit.aes = TRUE, ...) {
@@ -210,6 +233,12 @@ geom_timeline_label <- function(mapping = NULL, data = NULL, stat = "identity",
 #' @import leaflet
 #'
 #' @export
+#' 
+#' @examples
+#' \dontrun{
+#' eq_map(clean, annot_col = "popup_text")
+#' }
+#'
 eq_map <- function(clean, annot_col)
 {
   clean <- clean[,c("LATITUDE","LONGITUDE","EQ_PRIMARY",annot_col)]

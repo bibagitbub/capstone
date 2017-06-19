@@ -19,3 +19,9 @@ The function maps the epicenters (LATITUDE/LONGITUDE) and annotates
 each point in a pop up window containing annotation data stored in a
 column of the data frame
 }
+\examples{
+\dontrun{
+eq_map(clean, annot_col = "popup_text")
+}
+
+}

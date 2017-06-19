@@ -14,3 +14,9 @@ This function applies the layer of a GeomTimelineLabel geom
 \description{
 This function applies a ggplot layer of a GeomTimelineLabel geom to a map
 }
+\examples{
+\dontrun{
+geom_timeline_label(to_plot, aes(x = date, y = COUNTRY, label = LOCATION_NAME))
+}
+
+}
