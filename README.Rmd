@@ -1,13 +1,16 @@
 ---
-title: "Capstone Project"
-author: "Federica Bisio"
-date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Vignette Title}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+output: github_document
 ---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, echo = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "README-"
+)
+```
 
 This project provides functions for the cleaning and visualization of the
 NOOA Dataset. In particular, it provides:
@@ -30,10 +33,6 @@ and it applies the `eq_location_clean` function to LOCATION_NAME field.
 earthquakes <- capstone::eq_clean_data( readr::read_delim("signif.txt",delim="\t") )
 ```
 
-```{r, include=FALSE}
-earthquakes <- capstone::eq_clean_data( readr::read_delim("signif.txt",delim="\t") )
-```
-
 ## Visualization over time
 
 `geom_timeline` visualizes the times at which earthquakes occur within
@@ -41,20 +40,7 @@ certain countries. In addition, it displays the magnitudes (i.e. Richter
 scale value) and the number of deaths associated with each earthquake.
 `geom_timeline_label` adds labels of the earthquakes on a Timeline representation.
 
-```{r, fig.show='hold'}
-x <- as.Date("2000-01-01")
-xmax <- as.Date("2017-01-01")
-countries <- c("ITALY","USA")
-n_max <- 10
-
-to_plot <- earthquakes
-to_plot <- dplyr::filter(to_plot, date >= x & date <=xmax & (COUNTRY %in% countries))
-to_plot <- dplyr::filter(to_plot, !is.na(INTENSITY) & !is.na(DEATHS))
-to_plot <- dplyr::mutate(to_plot, COUNTRY = factor(COUNTRY, levels = unique(COUNTRY)))
-
-to_plot2 <- to_plot[order(to_plot$INTENSITY,decreasing = TRUE),]
-to_plot2 <- to_plot2[1:min(n_max,nrow(to_plot2)),]
-
+```{r, eval=FALSE}
 ggplot2::ggplot(data = to_plot) +
   ggplot2::geom_segment(ggplot2::aes(x = x, xend = xmax, y = COUNTRY, yend = COUNTRY),
                alpha = 0.5, color = "gray") +
@@ -75,14 +61,6 @@ containing the location cleaned by the `eq_location_clean` function,
 the magnitude (EQ_PRIMARY), and the total number of deaths (TOTAL_DEATHS).
 
 ```{r, eval=FALSE}
-out <- readr::read_delim("signif.txt", delim = "\t")
-```
-
-```{r, include=FALSE}
-out <- readr::read_delim("signif.txt", delim = "\t")
-```
-
-```{r, fig.show='hold'}
 out <- capstone::eq_clean_data(out)
 out <- dplyr::filter(out, COUNTRY == "MEXICO" & lubridate::year(date) >= 2000)
 out <- dplyr::mutate(out, popup_text = capstone::eq_create_label(out))
