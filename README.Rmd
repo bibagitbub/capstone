@@ -1,3 +1,5 @@
+## Capstone project - R software development
+
 This project provides functions for the cleaning and visualization of the
 NOOA Dataset. In particular, it provides:
 
